@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        h2 {
+    
+            text-align:center ;
+        }
+        .calculator-body {
+            width: 300px;
+            background-color: #3D3D5C;
+            margin: 20px auto;
+            border-radius: 10px;
+            padding: 20px;
+            padding-top: 40px;
+        }
+        .display {
+            background-color: #a1af77;
+            text-align: right;
+            width: 260px;
+            display: block;
+            margin: 0 auto 20px;
+            font-size: 30px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .button-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        .btn {
+            width: 60px;
+            height: 60px;
+            font-size: 20px;
+            border: 1px solid black;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn1 {
+            background-color: #ff6348;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h2>Calculator</h2>
+    <div class="calculator-body">
+        <input type="text" value="0" class="display" id="display" disabled>
+        <div class="button-container">
+            <button class="btn">AC</button>
+            <button class="btn">%</button>
+            <button class="btn">/</button>
+            <button class="btn">*</button>
+            <button class="btn">7</button>
+            <button class="btn">8</button>
+            <button class="btn">9</button>
+            <button class="btn">-</button>
+            <button class="btn">4</button>
+            <button class="btn">5</button>
+            <button class="btn">6</button>
+            <button class="btn">+</button>
+            <button class="btn">1</button>
+            <button class="btn">2</button>
+            <button class="btn">3</button>
+            <button class="btn1">=</button>
+            <button class="btn">0</button>
+            <button class="btn">.</button>
+        </div>
+    </div>
+
+    <script>
+        const display = document.getElementById('display');
+        const buttons = document.querySelectorAll('.btn, .btn1');
+        let currentInput = '';
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                const value = button.textContent;
+                if (value === 'AC') {
+                    currentInput = '';
+                    display.value = '0';
+                } else if (value === '=') {
+                    try {
+                        currentInput = eval(currentInput).toString();
+                        display.value = currentInput;
+                    } catch {
+                        display.value = 'Error';
+                        currentInput = '';
+                    }
+                } else {
+                    currentInput += value;
+                    display.value = currentInput;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
